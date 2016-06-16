@@ -1,6 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -150,23 +152,23 @@
             <list>
                 <!-- Example of classpath metadata with Extended Metadata -->
                 <!--<bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">-->
-                <!--<constructor-arg>-->
-                <!--<bean class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">-->
-                <!--<constructor-arg>-->
-                <!--<bean class="java.util.Timer"/>-->
-                <!--</constructor-arg>-->
-                <!--<constructor-arg>-->
-                <!--<bean class="org.opensaml.util.resource.ClasspathResource">-->
-                <!--<constructor-arg value="/metadata/idp.xml"/>-->
-                <!--</bean>-->
-                <!--</constructor-arg>-->
-                <!--<property name="parserPool" ref="parserPool"/>-->
-                <!--</bean>-->
-                <!--</constructor-arg>-->
-                <!--<constructor-arg>-->
-                <!--<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">-->
-                <!--</bean>-->
-                <!--</constructor-arg>-->
+                    <!--<constructor-arg>-->
+                        <!--<bean class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">-->
+                            <!--<constructor-arg>-->
+                                <!--<bean class="java.util.Timer"/>-->
+                            <!--</constructor-arg>-->
+                            <!--<constructor-arg>-->
+                                <!--<bean class="org.opensaml.util.resource.ClasspathResource">-->
+                                    <!--<constructor-arg value="/metadata/idp.xml"/>-->
+                                <!--</bean>-->
+                            <!--</constructor-arg>-->
+                            <!--<property name="parserPool" ref="parserPool"/>-->
+                        <!--</bean>-->
+                    <!--</constructor-arg>-->
+                    <!--<constructor-arg>-->
+                        <!--<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">-->
+                        <!--</bean>-->
+                    <!--</constructor-arg>-->
                 <!--</bean>-->
                 <!-- Example of HTTP metadata without Extended Metadata -->
                 <bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
@@ -328,5 +330,10 @@
     </bean>
 
     <bean id="parserPoolHolder" class="org.springframework.security.saml.parser.ParserPoolHolder"/>
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:port="${spring.redis.port}"/>
 
 </beans>
